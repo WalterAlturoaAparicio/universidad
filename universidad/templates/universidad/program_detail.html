@@ -1,0 +1,19 @@
+{% extends "universidad/base.html" %}
+
+{% block content %}
+
+<h1>{{ program.name }}</h1>
+
+<p>Tipo de programa: {{ program.type_program }}</p>
+
+<h2>Cursos del programa</h2>
+
+<ul>
+{% for course in program.courses.all %}
+    <li>{{ course.name }}</li>
+{% empty %}
+    <li>No hay cursos registrados</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

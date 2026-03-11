@@ -1,0 +1,17 @@
+{% extends "universidad/base.html" %}
+
+{% block content %}
+
+<h1>Cursos</h1>
+
+<ul>
+{% for course in courses %}
+    <li>
+        <a href="{% url 'universidad:course_detail' course.id %}">
+            {{ course.name }} - {{ course.program.name }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

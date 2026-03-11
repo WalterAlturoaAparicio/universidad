@@ -1,0 +1,26 @@
+{% extends "universidad/base.html" %}
+
+{% block content %}
+
+<h1>{{ course.name }}</h1>
+
+<p><strong>Programa:</strong> {{ course.program.name }}</p>
+<p><strong>Créditos:</strong> {{ course.credit_number }}</p>
+<p><strong>Cupos:</strong> {{ course.quotas }}</p>
+<p><strong>Categoría:</strong> {{ course.category }}</p>
+
+<h2>Estudiantes inscritos</h2>
+
+<ul>
+{% for ins in course.inscriptions.all %}
+    <li>
+        <a href="{% url 'universidad:student_detail' ins.student.id %}">
+            {{ ins.student.name }}
+        </a>
+    </li>
+{% empty %}
+    <li>No hay estudiantes inscritos</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
