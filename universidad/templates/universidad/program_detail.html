@@ -1,19 +1,41 @@
 {% extends "universidad/base.html" %}
 
+{% block title %}{{ program.name }} - Universidad{% endblock %}
+
 {% block content %}
 
 <h1>{{ program.name }}</h1>
 
-<p>Tipo de programa: {{ program.type_program }}</p>
+<div class="detail-container">
+    <div class="detail-row">
+        <div class="detail-item">
+            <strong>🆔 Código</strong>
+            <span>{{ program.id }}</span>
+        </div>
+    </div>
+</div>
 
-<h2>Cursos del programa</h2>
-
-<ul>
-{% for course in program.courses.all %}
-    <li>{{ course.name }}</li>
-{% empty %}
-    <li>No hay cursos registrados</li>
-{% endfor %}
-</ul>
+<div class="detail-container enrollments-section">
+    <h2>📚 Cursos del Programa</h2>
+    
+    {% if program.courses.all %}
+        <div class="list-container">
+            {% for course in program.courses.all %}
+                <div class="list-item">
+                    <a href="{% url 'universidad:course_detail' course.id %}">
+                        {{ course.name }}
+                    </a>
+                    <div class="secondary-text">
+                        <strong>Créditos:</strong> {{ course.credit_number }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            No hay cursos en este programa.
+        </div>
+    {% endif %}
+</div>
 
 {% endblock %}

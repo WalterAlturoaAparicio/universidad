@@ -1,21 +1,45 @@
 {% extends "universidad/base.html" %}
 
+{% block title %}{{ student.name }} - Universidad{% endblock %}
+
 {% block content %}
 
 <h1>{{ student.name }}</h1>
 
-<h2>Cursos inscritos</h2>
+<div class="detail-container">
+    <div class="detail-row">
+        <div class="detail-item">
+            <strong>🆔 Carné</strong>
+            <span>{{ student.id }}</span>
+        </div>
+        <div class="detail-item">
+            <strong>📧 Email</strong>
+            <span style="word-break: break-all;">{{ student.email|default:"No disponible" }}</span>
+        </div>
+    </div>
+</div>
 
-<ul>
-{% for ins in student.inscriptions.all %}
-    <li>
-        <a href="{% url 'universidad:course_detail' ins.course.id %}">
-            {{ ins.course.name }}
-        </a>
-    </li>
-{% empty %}
-    <li>No está inscrito en cursos</li>
-{% endfor %}
-</ul>
+<div class="detail-container enrollments-section">
+    <h2>📖 Cursos Inscritos</h2>
+    
+    {% if student.inscriptions.all %}
+        <div class="enrollments-grid">
+            {% for ins in student.inscriptions.all %}
+                <div class="student-card">
+                    <a href="{% url 'universidad:course_detail' ins.course.id %}">
+                        {{ ins.course.name }}
+                    </a>
+                    <div class="secondary-text" style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        {{ ins.course.program.name }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            Este estudiante no está inscrito en ningún curso.
+        </div>
+    {% endif %}
+</div>
 
 {% endblock %}

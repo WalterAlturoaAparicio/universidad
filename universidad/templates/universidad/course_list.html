@@ -1,17 +1,34 @@
 {% extends "universidad/base.html" %}
 
+{% block title %}Cursos - Universidad{% endblock %}
+
 {% block content %}
 
-<h1>Cursos</h1>
+<h1>Cursos Disponibles</h1>
 
-<ul>
-{% for course in courses %}
-    <li>
-        <a href="{% url 'universidad:course_detail' course.id %}">
-            {{ course.name }} - {{ course.program.name }}
-        </a>
-    </li>
-{% endfor %}
-</ul>
+<div class="list-container">
+    {% for course in courses %}
+        <div class="list-item">
+            <a href="{% url 'universidad:course_detail' course.id %}">
+                {{ course.name }}
+            </a>
+            <div class="secondary-text">
+                <strong>Programa:</strong> {{ course.program.name }}
+            </div>
+            <div class="secondary-text" style="margin-top: 0.75rem;">
+                <span style="display: inline-block; background: rgba(26, 58, 82, 0.1); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; color: var(--primary);">
+                    {{ course.credit_number }} créditos
+                </span>
+                <span style="display: inline-block; background: rgba(212, 165, 116, 0.1); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-left: 0.5rem;">
+                    {{ course.quotas }} cupos
+                </span>
+            </div>
+        </div>
+    {% empty %}
+        <div class="empty-state" style="grid-column: 1 / -1;">
+            No hay cursos disponibles en este momento.
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

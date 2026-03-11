@@ -1,17 +1,26 @@
 {% extends "universidad/base.html" %}
 
+{% block title %}Estudiantes - Universidad{% endblock %}
+
 {% block content %}
 
 <h1>Estudiantes</h1>
 
-<ul>
-{% for student in students %}
-    <li>
-        <a href="{% url 'universidad:student_detail' student.id %}">
-            {{ student.name }}
-        </a>
-    </li>
-{% endfor %}
-</ul>
+<div class="list-container">
+    {% for student in students %}
+        <div class="list-item">
+            <a href="{% url 'universidad:student_detail' student.id %}">
+                {{ student.name }}
+            </a>
+            <div class="secondary-text">
+                <strong>Carné:</strong> {{ student.id }}
+            </div>
+        </div>
+    {% empty %}
+        <div class="empty-state" style="grid-column: 1 / -1;">
+            No hay estudiantes registrados.
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

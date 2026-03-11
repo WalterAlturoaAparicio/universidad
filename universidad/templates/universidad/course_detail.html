@@ -1,26 +1,50 @@
 {% extends "universidad/base.html" %}
 
+{% block title %}{{ course.name }} - Universidad{% endblock %}
+
 {% block content %}
 
 <h1>{{ course.name }}</h1>
 
-<p><strong>Programa:</strong> {{ course.program.name }}</p>
-<p><strong>Créditos:</strong> {{ course.credit_number }}</p>
-<p><strong>Cupos:</strong> {{ course.quotas }}</p>
-<p><strong>Categoría:</strong> {{ course.category }}</p>
+<div class="detail-container">
+    <div class="detail-row">
+        <div class="detail-item">
+            <strong>📚 Programa</strong>
+            <span>{{ course.program.name }}</span>
+        </div>
+        <div class="detail-item">
+            <strong>⭐ Créditos</strong>
+            <span>{{ course.credit_number }}</span>
+        </div>
+        <div class="detail-item">
+            <strong>🎯 Cupos</strong>
+            <span>{{ course.quotas }}</span>
+        </div>
+        <div class="detail-item">
+            <strong>🏷️ Categoría</strong>
+            <span>{{ course.category }}</span>
+        </div>
+    </div>
+</div>
 
-<h2>Estudiantes inscritos</h2>
-
-<ul>
-{% for ins in course.inscriptions.all %}
-    <li>
-        <a href="{% url 'universidad:student_detail' ins.student.id %}">
-            {{ ins.student.name }}
-        </a>
-    </li>
-{% empty %}
-    <li>No hay estudiantes inscritos</li>
-{% endfor %}
-</ul>
+<div class="detail-container enrollments-section">
+    <h2>👥 Estudiantes Inscritos</h2>
+    
+    {% if course.inscriptions.all %}
+        <div class="enrollments-grid">
+            {% for ins in course.inscriptions.all %}
+                <div class="student-card">
+                    <a href="{% url 'universidad:student_detail' ins.student.id %}">
+                        {{ ins.student.name }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            No hay estudiantes inscritos en este curso.
+        </div>
+    {% endif %}
+</div>
 
 {% endblock %}

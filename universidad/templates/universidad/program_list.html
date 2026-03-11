@@ -1,17 +1,26 @@
 {% extends "universidad/base.html" %}
 
+{% block title %}Programas - Universidad{% endblock %}
+
 {% block content %}
 
-<h1>Programas</h1>
+<h1>Programas Académicos</h1>
 
-<ul>
-{% for program in programs %}
-    <li>
-        <a href="{% url 'universidad:program_detail' program.id %}">
-            {{ program.name }} - {{ program.type_program }}
-        </a>
-    </li>
-{% endfor %}
-</ul>
+<div class="list-container">
+    {% for program in programs %}
+        <div class="list-item">
+            <a href="{% url 'universidad:program_detail' program.id %}">
+                {{ program.name }}
+            </a>
+            <div class="secondary-text">
+                <strong>Código:</strong> {{ program.id }}
+            </div>
+        </div>
+    {% empty %}
+        <div class="empty-state" style="grid-column: 1 / -1;">
+            No hay programas disponibles.
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

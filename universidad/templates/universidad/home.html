@@ -1,7 +1,66 @@
 {% extends "universidad/base.html" %}
 
-{% block title %}Inicio - Django AI Lab{% endblock %}
+{% block title %}Inicio - Universidad Django AI Lab{% endblock %}
 
 {% block content %}
-<h1>¡Bienvenido!</h1>
+<div style="animation: fadeInUp 0.8s ease-out; text-align: center; padding: 3rem 0;">
+    <h1>¡Bienvenido a la Universidad!</h1>
+    
+    <p style="font-size: 1.25rem; color: var(--text-secondary); margin: 1.5rem 0; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+        Explora nuestros programas académicos, cursos disponibles y gestiona tu información estudiantil en una plataforma moderna e intuitiva.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+        <a href="{% url 'universidad:programs' %}" style="
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1.25rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            border: none;
+        " 
+        onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='var(--shadow-lg)';"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-md)';">
+            📚 Ver Programas
+        </a>
+
+        <a href="{% url 'universidad:courses' %}" style="
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--primary);
+            padding: 2rem;
+            border-radius: 1.25rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            border: none;
+        "
+        onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='var(--shadow-lg)';"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-md)';">
+            📖 Explorar Cursos
+        </a>
+
+        <a href="{% url 'universidad:students' %}" style="
+            background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 1.25rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            border: none;
+        "
+        onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='var(--shadow-lg)';"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='var(--shadow-md)';">
+            👥 Estudiantes
+        </a>
+    </div>
+</div>
 {% endblock %}
